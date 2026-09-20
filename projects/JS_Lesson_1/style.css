@@ -1,0 +1,66 @@
+.page-one-body {
+    background-color: black;
+    color: white;
+}
+
+.page-one-body a {
+    font-size: 20px;
+    color: #1eff00;
+}
+
+.abz-1 {
+    height: 100px;
+    background-image: url(./images/images.webp);
+    background-repeat: no-repeat;
+    color: blue;
+}
+
+.abz-2 {
+    height: 100px;
+    background-image: url(./images/images.webp);
+    color: blue;
+}
+
+.abz-3 {
+
+}
+
+.o-krosh-ka {
+    border-top-left-radius: 100px;
+    border-top-right-radius: 100px;
+
+    filter: contrast(20);
+    filter: sepia(100);
+    box-shadow: white 0px 5px 120px;
+    margin: 20px 190px;
+}
+
+
+.cubes{
+
+}
+
+.cube {
+    background-color: chocolate;
+    border: 2px solid brown;
+    height: 160px;
+    width: 100px;
+}
+
+.pos-1 {
+    position: absolute;
+    left: 800px;
+    top: 50px;
+}
+
+.pos-2 {
+    position: absolute;
+    left: 850px;
+    top: 100px;
+}
+
+.pos-3 {
+    position: absolute;
+    left: 900px;
+    top: 150px;
+}

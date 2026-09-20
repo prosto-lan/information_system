@@ -1,0 +1,221 @@
+*{
+    font-family: "Overpass Mono", monospace;
+    color: white;
+    scroll-behavior: smooth;
+}
+
+h1 {
+    font-size: 110px;
+}
+
+h2{
+    font-size: 50px;
+    font-weight: bold;
+    text-align: center;
+}
+
+h3{
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.body {
+    display: flex;
+    flex-direction: column;
+    background: -webkit-linear-gradient(90deg, #000000,#1e0d21,#30008a,#210240);
+    background: linear-gradient(90deg, #000000,#1e0d21,#30008a,#210240);
+}
+
+.body-header-main {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+/*                                                                  
+* background: -webkit-linear-gradient(90deg, #ffffff,#cef5c7,#d0ff7f,#e0f2da);
+* background: linear-gradient(90deg, #ffffff,#cef5c7,#d0ff7f,#e0f2da);
+*/
+
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.nav {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 6vh 0 0 0;
+    position: fixed;
+    left: 6vh;
+}
+
+.nav-link {
+    font-size: 25px;
+    padding: 10px 16px 5px 10px;
+    text-decoration: none;
+}
+
+.nav-link:hover {
+    border: 2px solid white;
+} 
+
+.nav-projects {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-left: 3vh;
+}
+
+.nav-p-link {
+    font-size: 18px;
+    padding: 10px 10px 5px 0;
+}
+
+.nav-p-link:hover {
+    text-decoration: underline;
+} 
+
+/** MAIN */
+
+
+.main {
+    margin-left: 30vh;
+    padding-top: 50px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/** БЛОК БЛОКОВ */
+
+
+.block {
+    scroll-margin-top: 60px;
+    width: 120vmin;
+    height: 90vmin;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+
+/** ГЛАВНАЯ */
+
+
+.main-block {
+    
+}
+
+.main-block p {
+    
+}
+
+.main-block-2 {
+    display: flex;
+    flex-direction: column;
+    align-items: first baseline;
+    gap: 10px;
+}
+
+.main-block-2 p {
+    font-size: 20px;
+    position: relative;
+    padding-left: 7px;
+}
+
+/** ОБО МНЕ */
+
+.about-me {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.about-me img{
+    width: 400px;
+}
+
+.about-me-info {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 650px;
+}
+
+.about-me-info p{
+    font-size: 20px;
+    text-align: center;
+}
+
+/** ПРОЕКТЫ */
+
+.projects-wrapper {
+    height: 500px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.projects-main {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+}
+
+.projects-block {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+}
+
+.prj-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    width: 200px;
+    height: 110px;
+
+    border-radius: 30px;
+    border: 1px solid #ffffff2a;
+    
+    backdrop-filter: 
+    saturate(180%) 
+    blur(60px);
+
+    background: rgba(0, 0, 0, 0.4);
+    box-shadow: 
+    -17px -17px 30px -15px rgba(0, 0, 0, 0.6),
+    0px 5px 10px 2px rgba(255, 255, 255, 0.2) inset;
+}
+
+.project-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+}
+
+.project-main a{
+    text-align: center;
+    color:#210240;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 8px;
+    width: 100px;
+    border-radius: 12px;
+    background-color: white;
+}
+
+.footer {
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    padding: 20px;
+}
