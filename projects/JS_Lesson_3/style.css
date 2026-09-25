@@ -1,0 +1,52 @@
+* p {
+    font-size: 14px;
+}
+
+
+.t1-form {
+
+}
+
+.t2-form {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    gap: 5px;
+}
+
+.t3-form {
+
+}
+
+.t4-form {
+
+}
+
+.t5-form button {
+    padding: 10px;
+    border-radius: 20px;
+}
+
+.t5-img {
+    vertical-align: middle;
+    width: 50px;
+    margin: 0 10px 0 0 ;
+}
+
+.t7-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 300px;
+}
+
+.t7-form select{
+    width: 80px;
+}
+
+.t9-form {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    gap: 5px;
+}

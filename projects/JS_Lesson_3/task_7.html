@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Формы - Задание 7</title>
+</head>
+<body>
+    <h2>Формы - Задание 7</h2>
+    <form name="form_7" class="t7-form">
+        Какой язык вы хотите изучать?
+        <select name="language" size="1">
+            <option selected value="csharp">C#</option>
+            <option value="py">Python</option>
+            <option value="java">Java</option>
+        </select>
+        Какое время вы готовы на это потратить?
+        <select name="time" size="1">
+            <option selected value="m1">1 месяц</option>
+            <option value="m2">2 месяца</option>
+            <option value="m3">3 месяца</option>
+        </select>
+        Какие дни недели для занятий вас устроят?
+        (Выбирайте с зажатой клавишей ctr)
+        <select name="day" size="7" multiple>
+            <option selected value="mon">Понедельник</option>
+            <option value="tue">Вторник</option>
+            <option value="wen">Среда</option>
+            <option value="thu">Четверг</option>
+            <option value="fri">Пятница</option>
+            <option value="sat">Суббота</option>
+            <option value="san">Воскресенье</option>
+        </select>
+    </form>
+</body>
+</html>

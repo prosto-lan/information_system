@@ -97,7 +97,7 @@ h3{
 .block {
     scroll-margin-top: 60px;
     width: 120vmin;
-    height: 90vmin;
+    height: 20vmin;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -108,7 +108,7 @@ h3{
 
 
 .main-block {
-    
+
 }
 
 .main-block p {
@@ -128,34 +128,10 @@ h3{
     padding-left: 7px;
 }
 
-/** ОБО МНЕ */
-
-.about-me {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.about-me img{
-    width: 400px;
-}
-
-.about-me-info {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    width: 650px;
-}
-
-.about-me-info p{
-    font-size: 20px;
-    text-align: center;
-}
-
-/** ПРОЕКТЫ */
+/** ЗАДАНИЯ */
 
 .projects-wrapper {
-    height: 500px;
+    height: 60vh;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -170,6 +146,8 @@ h3{
 .projects-block {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 40px;
 }
 
@@ -178,7 +156,7 @@ h3{
     flex-direction: row;
     justify-content: center;
 
-    width: 200px;
+    min-width: 200px;
     height: 110px;
 
     border-radius: 30px;
