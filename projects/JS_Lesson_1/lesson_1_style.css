@@ -50,17 +50,17 @@
 .pos-1 {
     position: absolute;
     left: 800px;
-    top: 50px;
+    top: 250px;
 }
 
 .pos-2 {
     position: absolute;
     left: 850px;
-    top: 100px;
+    top: 300px;
 }
 
 .pos-3 {
     position: absolute;
     left: 900px;
-    top: 150px;
+    top: 350px;
 }

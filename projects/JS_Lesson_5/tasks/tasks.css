@@ -1,0 +1,139 @@
+
+/* Задание 1 */
+
+#btn_color:active {
+    background: red;
+    transition: background 0s;
+}
+
+/* Задание 2 */
+
+.button:hover {
+    background-color: red;
+}
+
+/* Задание 3 */
+
+#my-btn:active {
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    font-size: 18px;
+}
+
+#my-btn,
+#my-btn:active,
+#my-btn:focus {
+    outline: none;
+}
+
+/* Задание 4 */
+
+#wrap1 {
+    border: 1px #000 solid;
+    width: 200px;
+    padding: 10px;
+    font-size: 1.5em;
+    transition: width 4s;
+}
+
+#wrap1:hover {
+    width: 500px;
+}
+
+/* Задание 5 */
+
+.tooltip {
+    position: relative;
+    background: #eaeaea;
+    cursor: help;
+    display: inline-block;
+    text-decoration: none;
+    color: #222;
+    outline: none;
+    text-indent: 0;
+    padding: 0 3px;
+}
+
+.tooltip:hover:before {
+    content: attr(data-title);
+    white-space: pre-line;
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    z-index: 9999;
+    width: 230px;
+    margin-left: -127px;
+    padding: 10px;
+    border: 2px solid #ccc;
+    opacity: .9;
+    background-image: linear-gradient(rgba(255,255,255,.5), gba(255,255,255,0));
+	border-radius: 4px;
+    box-shadow: 0 1px 2px rgba(0,0,0,.4), 0 1px 0 gba(255,255,255,.5) inset;
+	text-shadow: 0 1px 0 rgba(255,255,255,.4);                           
+}
+
+.tooltip:hover:after {
+    content: "";
+    position: absolute;
+    z-index: 10000;
+    bottom: 24px;
+    left: 50%;
+    margin-left: -8px;
+    border-top: 8px solid #ddd;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 0;
+}
+
+.yellow-tooltip:hover:before {
+    border-color: #e1ca82;
+    background-color: #ffeaa6;
+}
+
+.yellow-tooltip:hover::after {
+    border-top-color: #ffeaa6;
+}
+
+/* Задание 6 */
+
+.task-6 {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.div-task-6 {
+    margin-top: 100px;
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+}
+
+.pink-circle {
+    width: 50px;
+    height: 50px;
+    background-color: hotpink;
+    border-radius: 100px;
+    animation-name: pc_transform;
+}
+
+.blue-square {
+    width: 150px;
+    height: 150px;
+    background-color: deepskyblue;
+    border-radius: 10px;
+}
+
+@keyframes pc_transform {
+    0% {
+        width: 50px;
+        height: 50px;
+        border-radius: 100px;
+    }
+    100% {
+        width: 150px;
+        height: 150px;
+        background-color: deepskyblue;
+        border-radius: 10px;
+    }
+}
