@@ -1,0 +1,307 @@
+html {
+    font-size: 16px; /* 1rem = 16px */
+}
+
+@media (max-width: 768px) {
+    html { font-size: 14px; }
+}
+
+@media (max-width: 480px) {
+    html { font-size: 13px; }
+}
+
+* {
+    font-family: "Overpass Mono", monospace;
+    color: white;
+    scroll-behavior: smooth;
+}
+
+h1 {
+    /* ~32px → ~80px, плавно от ширины окна + учитывает настройки пользователя */
+    font-size: clamp(2rem, 6vw + 1rem, 5rem);
+}
+
+h2 {
+    /* ~24px → ~50px */
+    font-size: clamp(1.5rem, 3vw + 1rem, 3.125rem);
+    font-weight: bold;
+    text-align: center;
+}
+
+h3 {
+    /* ~16px → ~20px */
+    font-size: clamp(1rem, 1.5vw + 0.8rem, 1.25rem);
+    font-weight: bold;
+    text-align: center;
+}
+
+.body {
+    display: flex;
+    flex-direction: column;
+    background: -webkit-linear-gradient(90deg, #000000, #1e0d21, #30008a, #210240);
+    background: linear-gradient(90deg, #000000, #1e0d21, #30008a, #210240);
+}
+
+.body-header-main {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+/* ============================================
+   HEADER / NAV
+   ============================================ */
+
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.nav {
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;              /* 30px */
+    padding: 6vh 0 0 0;
+    position: fixed;
+    left: 6vh;
+}
+
+.nav-link {
+    font-size: 1.5rem;       /* 25px */
+    padding: 0.625rem 1rem 0.3125rem 0.625rem;
+    text-decoration: none;
+}
+
+.nav-link:hover {
+    border: 2px solid white;
+}
+
+.nav-projects {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;               /* 20px */
+    padding-left: 3vh;
+}
+
+.nav-p-link {
+    font-size: 1.1rem;        /* 18px */
+    padding: 0.6rem 0.6rem 0.3rem 0;
+}
+
+.nav-p-link:hover {
+    text-decoration: underline;
+}
+
+/* ============================================
+   MAIN
+   ============================================ */
+
+.main {
+    margin-left: 30vh;
+    padding: 3.125rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ============================================
+   БЛОК БЛОКОВ
+   ============================================ */
+
+.block {
+    scroll-margin-top: 60px;
+    max-width: 120vmin;
+    height: 90vmin;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+/* ============================================
+   ГЛАВНАЯ
+   ============================================ */
+
+.main-block {
+    /* пусто */
+}
+
+.main-block p {
+    /* пусто */
+}
+
+.main-block-2 {
+    display: flex;
+    flex-direction: column;
+    align-items: first baseline;
+    gap: 0.625rem;              /* 10px */
+}
+
+.main-block-2 p {
+    font-size: 1.25rem;         /* 20px */
+    position: relative;
+    padding-left: 0.4rem;
+}
+
+/* ============================================
+   ОБО МНЕ
+   ============================================ */
+
+.about-me {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.about-me img {
+    width: 25rem;               /* 400px */
+    max-width: 100%;
+    height: auto;
+}
+
+.about-me-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;                /* 24px */
+    width: 40rem;           /* 650px */
+    max-width: 100%;
+}
+
+.about-me-info p {
+    font-size: 1.1rem;        /* 18px */
+    text-align: center;
+}
+
+/* ============================================
+   ПРОЕКТЫ
+   ============================================ */
+
+.projects-wrapper {
+    height: 500px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.projects-main {
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+}
+
+.projects-block {
+    max-width: 30lvw;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2.5rem;
+}
+
+.prj-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    width: 12rem;
+    height: 6.8rem;
+
+    border-radius: 30px;
+    border: 1px solid #ffffff2a;
+
+    backdrop-filter:
+        saturate(180%)
+        blur(60px);
+
+    background: rgba(0, 0, 0, 0.4);
+    box-shadow:
+        -17px -17px 30px -15px rgba(0, 0, 0, 0.6),
+        0px 5px 10px 2px rgba(255, 255, 255, 0.2) inset;
+}
+
+.project-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.6rem;
+}
+
+.project-main h3 {
+    margin: 0;
+}
+
+.project-main a {
+    text-align: center;
+    color: #210240;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 0.5rem;
+    min-width: 6.2rem;
+    border-radius: 12px;
+    background-color: white;
+}
+
+.footer {
+    height: 18rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    padding: 0.2rem;
+}
+
+@media (max-width: 1240px) {
+    .main {
+        margin-left: 30vh;
+        padding: 3rem 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .about-me img {
+        display: none;
+    }
+
+    .about-me-info {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        width: min(25rem, 90vw);
+    }
+
+    .about-me-info p {
+        font-size: 1rem;
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .main {
+        margin-left: 0;
+        padding: 1.5rem;
+    }
+
+    .nav {
+        position: static;
+        padding: 1.5rem 0;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .nav-projects {
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding-left: 0;
+    }
+
+    .block {
+        height: auto;
+        padding: 2rem 0;
+    }
+
+    .projects-block {
+        max-width: 100%;
+        justify-content: center;
+    }
+}

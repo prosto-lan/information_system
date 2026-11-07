@@ -1,3 +1,15 @@
+html {
+    font-size: 16px;
+}
+
+@media (max-width: 768px) {
+    html { font-size: 14px; }
+}
+
+@media (max-width: 480px) {
+    html { font-size: 13px; }
+}
+
 *{
     font-family: "Overpass Mono", monospace;
     color: white;
@@ -5,17 +17,18 @@
 }
 
 h1 {
-    font-size: 110px;
+    font-size: clamp(2rem, 2vw + 4rem, 8rem);
+    font-weight: bold;
 }
 
-h2{
-    font-size: 50px;
+h2 {
+    font-size: clamp(1.5rem, 3vw + 2rem, 4rem);
     font-weight: bold;
     text-align: center;
 }
 
-h3{
-    font-size: 20px;
+h3 {
+    font-size: clamp(1rem, 1.5vw + 0.8rem, 1rem);
     font-weight: bold;
     text-align: center;
 }
@@ -33,11 +46,6 @@ h3{
     justify-content: space-between;
 }
 
-/*                                                                  
-* background: -webkit-linear-gradient(90deg, #ffffff,#cef5c7,#d0ff7f,#e0f2da);
-* background: linear-gradient(90deg, #ffffff,#cef5c7,#d0ff7f,#e0f2da);
-*/
-
 .header {
     display: flex;
     flex-direction: column;
@@ -54,30 +62,14 @@ h3{
 }
 
 .nav-link {
-    font-size: 25px;
+    font-size: 30px;
     padding: 10px 16px 5px 10px;
     text-decoration: none;
 }
 
 .nav-link:hover {
     border: 2px solid white;
-} 
-
-.nav-projects {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding-left: 3vh;
 }
-
-.nav-p-link {
-    font-size: 18px;
-    padding: 10px 10px 5px 0;
-}
-
-.nav-p-link:hover {
-    text-decoration: underline;
-} 
 
 /** MAIN */
 
@@ -96,8 +88,8 @@ h3{
 
 .block {
     scroll-margin-top: 60px;
-    width: 120vmin;
-    height: 20vmin;
+    max-width: 72lvw;
+    max-height: 90vmin;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -108,7 +100,7 @@ h3{
 
 
 .main-block {
-
+    
 }
 
 .main-block p {
@@ -128,10 +120,34 @@ h3{
     padding-left: 7px;
 }
 
-/** ЗАДАНИЯ */
+/** ОБО МНЕ */
+
+.about-me {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.about-me img{
+    width: 400px;
+}
+
+.about-me-info {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 40lvw;
+}
+
+.about-me-info p{
+    font-size: 18px;
+    text-align: center;
+}
+
+/** ПРОЕКТЫ */
 
 .projects-wrapper {
-    height: 60vh;
+    min-height: 55vh;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -144,10 +160,11 @@ h3{
 }
 
 .projects-block {
+    width: 70lvw;
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
     justify-content: center;
+    flex-wrap: wrap;
     gap: 40px;
 }
 
@@ -156,8 +173,10 @@ h3{
     flex-direction: row;
     justify-content: center;
 
-    min-width: 200px;
-    height: 110px;
+    width: 200px;
+    min-height: 76px;
+
+    padding: 16px 0px;
 
     border-radius: 30px;
     border: 1px solid #ffffff2a;
@@ -172,10 +191,33 @@ h3{
     0px 5px 10px 2px rgba(255, 255, 255, 0.2) inset;
 }
 
+.practice-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    width: 200px;
+    height: 110px;
+
+    border-radius: 30px;
+    border: 2px solid #fffc65c0;
+    
+    backdrop-filter: 
+    saturate(180%) 
+    blur(60px);
+
+    background: rgba(255, 255, 0, 0.007);
+    box-shadow: 
+    -17px -17px 30px -15px rgba(0, 0, 0, 0.6),
+    0px 5px 10px 2px rgba(255, 255, 255, 0.2) inset;
+}
+
 .project-main {
+    width: 50lvw;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     gap: 10px;
 } 
 
@@ -184,6 +226,7 @@ h3{
 }
 
 .project-main a{
+    width: 1em;
     text-align: center;
     color:#210240;
     font-size: 16px;
@@ -200,4 +243,28 @@ h3{
     flex-direction: column;
     justify-content: end;
     padding: 20px;
+}
+
+
+
+
+
+@media (max-width: 1240px) {
+    .main {
+        margin-left: 30vh;
+        padding-top: 50px 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .about-me img{
+        display: none;
+    }
+
+    .about-me-info {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
 }

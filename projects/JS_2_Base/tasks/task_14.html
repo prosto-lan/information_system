@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Script - Задание 14</title>
+</head>
+<body>
+    <h2>Java Script - Задание 14</h2>
+    <button onclick="task14()">Решить пример</button>
+    <script>
+        function task14() {
+            var a = 1;
+            var b = 10;
+
+            var a1 = Math.floor(a + (b - a + 1) * Math.random());
+            var b1 = Math.floor(a + (b - a + 1) * Math.random());
+
+            var question = prompt(a1 + "+" + b1 + "= ?");
+            if (question == a1 + b1) {
+                alert("А ты хорош!");
+            } else {
+                alert("Неправильно(");
+            }
+        }
+    </script>
+</body>
+</html>
