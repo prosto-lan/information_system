@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Выживший</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main>
+        <div class="select_map" id="select_map">
+            <h2>Выберите мир</h2>
+            <select id="MapSelector">
+                <option value="Бункер">Бункер</option>
+                <option value="Поверхность">Поверхность</option>
+                <option value="Лаборатория">Лаборатория</option>
+            </select>
+            <button onclick="selectMap()">Выбрать</button>
+        </div>
+        <div class="select_name none" id="select_name">
+            <h2>Введите имя героя</h2>
+            <input id="name_input" type="text">
+            <button onclick="selectName()">Выбрать</button>
+            <p id="error_log"></p>
+        </div>
+        <div class="game none" id="game">
+            <div class="interface">
+                <p id="mapLabel">Мир: </p>
+                <p id="playerLabel">Игрок: </p>
+                <p id="timerElement">Время в игре: </p>
+                <p id="enemyCount">Монстров: </p>
+                <p id="trapCount">Ловушек: </p>
+                <p id="lifes">Жизней: </p>
+            </div>
+            <div id="gameContainer">
+                <div id="player" style="left: 0; top: 0;"></div>
+            </div>
+        </div>
+    </main>
+</body>
+
+<script>
+    const state = {
+        world: null,
+        playerName: null,
+        timeLeft: 0,
+        timerId: null,
+        spawnIntervalId: null,
+        enemies: [],
+        traps: [],
+        lives: 5,
+        running: false,
+        timeStop: false,
+        collisionIntervalId: null,
+        playerPosition: { x: 0, y: 0 }
+    };
+
+    const MAX_ENEMIES = 30;
+    const MAX_TRAPS = 10;
+    const MOVE_SPEED = 20;
+
+    // ===== DOM =====
+    const selectNameBlock = document.getElementById('select_name');
+    const selectMapBlock = document.getElementById('select_map');
+    const gameBlock = document.getElementById('game');
+    const gameContainer = document.getElementById('gameContainer');
+    const player = document.getElementById('player');
+    const timerElement = document.getElementById('timerElement');
+    const enemyCountEl = document.getElementById('enemyCount');
+    const trapCountEl = document.getElementById('trapCount');
+    const lifesEl = document.getElementById('lifes');
+    const mapLabel = document.getElementById('mapLabel');
+    const playerLabel = document.getElementById('playerLabel');
+
+    function selectMap() {
+        const selector = document.getElementById('MapSelector');
+        state.world = selector.value;
+        alert('Выбран мир: ' + state.world);
+
+        selectMapBlock.classList.add('none');
+        selectNameBlock.classList.remove('none');
+        document.getElementById('name_input').focus();
+    }
+
+    function selectName() {
+        const input = document.getElementById('name_input');
+        const value = input.value.trim();
+
+        if (value === '') {
+            document.getElementById('error_log').textContent = 'Введите имя героя';
+            return;
+        }
+
+        state.playerName = value;
+        document.getElementById('error_log').textContent = '';
+
+        selectNameBlock.classList.add('none');
+        gameBlock.classList.remove('none');
+
+        mapLabel.textContent = 'Мир: ' + state.world;
+        playerLabel.textContent = 'Игрок: ' + state.playerName;
+
+        startGame();
+    }
+
+    function startTimer() {
+        state.timerId = setInterval(() => {
+            if (state.timeStop) return;
+
+            state.timeLeft++;
+            const minutes = Math.floor(state.timeLeft / 60);
+            const seconds = state.timeLeft % 60;
+            timerElement.textContent =
+                'Время в игре: ' + minutes + ':' + String(seconds).padStart(2, '0');
+        }, 1000);
+    }
+
+    function startGame() {
+        if (state.running) return;
+        state.running = true;
+
+        state.playerPosition = { x: 0, y: 0 };
+        player.style.left = '0px';
+        player.style.top = '0px';
+
+        startTimer();
+
+        document.addEventListener('keydown', handleKeyDown);
+
+        for (let i = 0; i < 5; i++) spawnEnemy();
+        for (let j = 0; j < 2; j++) spawnTrap();
+
+        state.spawnIntervalId = setInterval(() => {
+            if (state.timeStop) return;
+            for (let i = 0; i < 3; i++) spawnEnemy();
+            for (let j = 0; j < 1; j++) spawnTrap();
+        }, 3000);
+
+        state.collisionIntervalId = setInterval(checkCollisions, 100);
+    }
+
+    function handleKeyDown(event) {
+        if (state.timeStop) return;
+
+        switch (event.key) {
+            case 'ArrowUp':
+                event.preventDefault();
+                movePlayer(0, -MOVE_SPEED);
+                break;
+            case 'ArrowDown':
+                event.preventDefault();
+                movePlayer(0, MOVE_SPEED);
+                break;
+            case 'ArrowLeft':
+                event.preventDefault();
+                movePlayer(-MOVE_SPEED, 0);
+                break;
+            case 'ArrowRight':
+                event.preventDefault();
+                movePlayer(MOVE_SPEED, 0);
+                break;
+        }
+    }
+
+    function movePlayer(dx, dy) {
+        const maxX = gameContainer.clientWidth - player.clientWidth;
+        const maxY = gameContainer.clientHeight - player.clientHeight;
+
+        state.playerPosition.x = Math.max(0, Math.min(maxX, state.playerPosition.x + dx));
+        state.playerPosition.y = Math.max(0, Math.min(maxY, state.playerPosition.y + dy));
+
+        player.style.left = state.playerPosition.x + 'px';
+        player.style.top = state.playerPosition.y + 'px';
+    }
+
+    function spawnEnemy() {
+        if (state.enemies.length >= MAX_ENEMIES) return;
+
+        const enemy = document.createElement('div');
+        enemy.className = 'enemy';
+
+        const maxX = gameContainer.clientWidth - 25;
+        const maxY = gameContainer.clientHeight - 25;
+        const x = Math.random() * Math.max(1, maxX);
+        const y = Math.random() * Math.max(1, maxY);
+
+        enemy.style.left = x + 'px';
+        enemy.style.top = y + 'px';
+
+        const enemyData = {
+            el: enemy,
+            x: x,
+            y: y,
+            dx: (Math.random() - 0.5) * 4,
+            dy: (Math.random() - 0.5) * 4,
+            intervalId: null
+        };
+
+        gameContainer.appendChild(enemy);
+        state.enemies.push(enemyData);
+        updateCounters();
+
+        startEnemyMovement(enemyData);
+    }
+
+    function startEnemyMovement(data) {
+        data.intervalId = setInterval(() => {
+            if (state.timeStop) return;
+
+            data.x += data.dx;
+            data.y += data.dy;
+
+            const maxX = gameContainer.clientWidth - 25;
+            const maxY = gameContainer.clientHeight - 25;
+
+            if (data.x <= 0 || data.x >= maxX) {
+                data.dx *= -1;
+                data.x = Math.max(0, Math.min(maxX, data.x));
+            }
+            if (data.y <= 0 || data.y >= maxY) {
+                data.dy *= -1;
+                data.y = Math.max(0, Math.min(maxY, data.y));
+            }
+
+            data.el.style.left = data.x + 'px';
+            data.el.style.top = data.y + 'px';
+        }, 50);
+    }
+
+    function spawnTrap() {
+        if (state.traps.length >= MAX_TRAPS) return;
+
+        const trap = document.createElement('div');
+        trap.className = 'trap';
+
+        const maxX = gameContainer.clientWidth - 20;
+        const maxY = gameContainer.clientHeight - 20;
+        const x = Math.random() * Math.max(1, maxX);
+        const y = Math.random() * Math.max(1, maxY);
+
+        trap.style.left = x + 'px';
+        trap.style.top = y + 'px';
+
+        gameContainer.appendChild(trap);
+        state.traps.push({
+            el: trap,
+            x: x,
+            y: y,
+            used: false
+        });
+        updateCounters();
+    }
+
+    function checkCollisions() {
+        if (state.timeStop || !state.running) return;
+
+        const pX = state.playerPosition.x;
+        const pY = state.playerPosition.y;
+        const pSize = player.clientWidth;
+        const pCenterX = pX + pSize / 2;
+        const pCenterY = pY + pSize / 2;
+
+        for (let i = state.enemies.length - 1; i >= 0; i--) {
+            const e = state.enemies[i];
+            const eSize = 25;
+            const eCenterX = e.x + eSize / 2;
+            const eCenterY = e.y + eSize / 2;
+
+            const dist = Math.hypot(eCenterX - pCenterX, eCenterY - pCenterY);
+            if (dist < pSize / 2 + eSize / 2) {
+
+                removeEnemy(i);
+                loseLife();
+                if (state.timeStop) return;
+            }
+        }
+
+        for (let j = state.traps.length - 1; j >= 0; j--) {
+            const t = state.traps[j];
+            if (t.used) continue;
+
+            const tSize = 20;
+            const tCenterX = t.x + tSize / 2;
+            const tCenterY = t.y + tSize / 2;
+
+            const dist = Math.hypot(tCenterX - pCenterX, tCenterY - pCenterY);
+            if (dist < pSize / 2 + tSize / 2) {
+                t.used = true;
+                removeTrap(j);
+                loseLife();
+                if (state.timeStop) return;
+            }
+        }
+    }
+
+    function removeEnemy(index) {
+        const e = state.enemies[index];
+        if (!e) return;
+        clearInterval(e.intervalId);
+        e.el.remove();
+        state.enemies.splice(index, 1);
+        updateCounters();
+    }
+
+    function removeTrap(index) {
+        const t = state.traps[index];
+        if (!t) return;
+        t.el.remove();
+        state.traps.splice(index, 1);
+        updateCounters();
+    }
+
+    function loseLife() {
+        if (state.lives > 0) state.lives--;
+        lifesEl.textContent = 'Жизней: ' + state.lives;
+
+
+        if (state.lives <= 0) {
+            endGame();
+        }
+    }
+
+    // ===== Счётчики =====
+    function updateCounters() {
+        enemyCountEl.textContent = 'Монстров: ' + state.enemies.length;
+        trapCountEl.textContent = 'Ловушек: ' + state.traps.length;
+    }
+
+    function endGame() {
+        state.timeStop = true;
+        state.running = false;
+
+        clearInterval(state.timerId);
+        clearInterval(state.spawnIntervalId);
+        clearInterval(state.collisionIntervalId);
+
+        state.enemies.forEach(e => clearInterval(e.intervalId));
+
+        setTimeout(() => {
+            alert('Игра окончена! ' + state.playerName + ' продержался ' +
+                Math.floor(state.timeLeft / 60) + ':' +
+                String(state.timeLeft % 60).padStart(2, '0') +
+                ' в мире "' + state.world + '".');
+            location.reload();
+        }, 100);
+    }
+</script>
+</html>

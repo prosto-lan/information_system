@@ -89,7 +89,7 @@ h3 {
 .block {
     scroll-margin-top: 60px;
     max-width: 72lvw;
-    height: 90vmin;
+    min-height: 90vmin;
     display: flex;
     flex-direction: row;
     align-items: center;
